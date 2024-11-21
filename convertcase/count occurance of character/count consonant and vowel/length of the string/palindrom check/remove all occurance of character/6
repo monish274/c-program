@@ -1,0 +1,40 @@
+
+#include <stdio.h>
+
+void remove_char(char *str, char ch) {
+    int i = 0, j = 0;
+
+    // Loop through the string
+    while (str[i] != '\0') {
+        // If the current character is not the one to remove, keep it
+        if (str[i] != ch) {
+            str[j] = str[i];
+            j++;  // Move the new string index forward
+        }
+        i++;  // Move to the next character in the original string
+    }
+
+    // Null-terminate the modified string
+    str[j] = '\0';
+}
+
+int main() {
+    char str[100], ch;
+
+    // Input the string
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);  // Using fgets to handle spaces
+    str[strcspn(str, "\n")] = 0;  // Remove the newline character added by fgets
+
+    // Input the character to remove
+    printf("Enter a character to remove: ");
+    scanf("%c", &ch);
+
+    // Remove the character from the string
+    remove_char(str, ch);
+
+    // Output the modified string
+    printf("Modified string: %s\n", str);
+
+    return 0;
+}
