@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <ctype.h>  // For tolower() function
+
+void count_vowels_and_consonants(const char *str, int *vowels, int *consonants) {
+    *vowels = 0;
+    *consonants = 0;
+
+    // Loop through each character of the string
+    while (*str != '\0') {
+        // Convert the character to lowercase for easier comparison
+        char ch = tolower(*str);
+
+        // Check if the character is a vowel
+        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+            (*vowels)++;
+        }
+        // Check if the character is a consonant (must be a letter)
+        else if ((ch >= 'a' && ch <= 'z')) {
+            (*consonants)++;
+        }
+
+        // Move to the next character
+        str++;
+    }
+}
+
+int main() {
+    char str[100];
+    int vowels, consonants;
+
+    // Input the string
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);  // Read input with spaces
+    str[strcspn(str, "\n")] = 0;  // Remove the newline character if fgets adds it
+
+    // Count vowels and consonants
+    count_vowels_and_consonants(str, &vowels, &consonants);
+
+    // Output the result
+    printf("Vowels: %d\n", vowels);
+    printf("Consonants: %d\n", consonants);
+
+    return 0;
+}
+
