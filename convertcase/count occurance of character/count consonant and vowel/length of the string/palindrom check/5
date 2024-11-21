@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <ctype.h>  // For the tolower() function
+
+int is_palindrome(const char *str) {
+    int start = 0, end = 0;
+
+    // Find the length of the string and set the end pointer
+    while (str[end] != '\0') {
+        end++;
+    }
+    end--;  // Move back to the last character
+
+    // Compare characters from both ends, ignoring spaces and case differences
+    while (start < end) {
+        // Skip spaces and non-alphanumeric characters
+        if (!isalnum(str[start])) {
+            start++;
+        } else if (!isalnum(str[end])) {
+            end--;
+        } else {
+            // Compare characters in a case-insensitive manner
+            if (tolower(str[start]) != tolower(str[end])) {
+                return 0;  // Not a palindrome
+            }
+            start++;
+            end--;
+        }
+    }
+
+    return 1;  // It's a palindrome
+}
+
+int main() {
+    char str[100];
+
+    // Input the string
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);  // Use fgets to handle spaces
+    str[strcspn(str, "\n")] = 0;  // Remove newline character added by fgets
+
+    // Check if the string is a palindrome
+    if (is_palindrome(str)) {
+        printf("The string is a palindrome.\n");
+    } else {
+        printf(
