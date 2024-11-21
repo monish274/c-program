@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <ctype.h>  // For the tolower() and toupper() functions
+
+void convert_case(char *str) {
+    int i = 0;
+
+    // Loop through each character in the string
+    while (str[i] != '\0') {
+        if (islower(str[i])) {
+            str[i] = toupper(str[i]);  // Convert to uppercase if it's lowercase
+        } else if (isupper(str[i])) {
+            str[i] = tolower(str[i]);  // Convert to lowercase if it's uppercase
+        }
+        i++;  // Move to the next character
+    }
+}
+
+int main() {
+    char str[100];
+
+    // Input the string
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);  // Using fgets to allow spaces
+    str[strcspn(str, "\n")] = 0;  // Remove the newline character added by fgets
+
+    // Convert the case of all characters in the string
+    convert_case(str);
+
+    // Output the modified string
+    printf("Converted string: %s\n", str);
+
+    return 0;
+}
